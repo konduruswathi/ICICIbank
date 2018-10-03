@@ -5,26 +5,26 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.icicibank.entities.Customer;
-import com.capgemini.icicibank.exception.CustomerNotFoundException;
+
+import com.capgemini.icicibank.exception.UserNotFoundException;
 import com.capgemini.icicibank.repository.CustomerRepository;
 import com.capgemini.icicibank.service.CustomerService;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
+	
 	@Autowired
-CustomerRepository customerRepository;
+	CustomerRepository customerRepository;
+
 	@Override
-	public Customer authenticate(Customer customer) throws CustomerNotFoundException  {
+	public Customer authenticate(Customer customer) throws UserNotFoundException {
 		try {
-			return customerRepository.authenticate(customer);		
-			}
-		catch(DataAccessException e) {
-			CustomerNotFoundException c=new CustomerNotFoundException("user not found");
-			c.initCause(e);
-			throw c;
+			return customerRepository.authenticate(customer);
+		} catch (DataAccessException ex) {
+			UserNotFoundException u = new UserNotFoundException("Customer not found");
+			u.initCause(ex);
+			throw u;
 		}
-		
-		
 	}
 
 	@Override

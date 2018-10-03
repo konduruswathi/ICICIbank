@@ -27,7 +27,7 @@ public class BankAccountRepositoryImpl implements BankAccountRepository {
 	@Override
 	public double updateBalance(long accountId, double newBalance) {
 		double balance =jdbcTemplate.update("update bankaccounts set balance=? where account_id=?", new Object[] {newBalance,accountId});
-		return balance;
+		return getBalance(accountId);
 	}
 	
 	

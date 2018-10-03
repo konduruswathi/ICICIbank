@@ -5,14 +5,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.capgemini.icicibank.exception.CustomerNotFoundException;
 import com.capgemini.icicibank.exception.LowBalanceException;
+import com.capgemini.icicibank.exception.UserNotFoundException;
 
 @ControllerAdvice
 public class ExceptionController {
 
-	@ExceptionHandler(value=CustomerNotFoundException.class)
-	public String handleError(HttpServletRequest request,CustomerNotFoundException  exception)
+	@ExceptionHandler(value=UserNotFoundException.class)
+	public String handleError(HttpServletRequest request,UserNotFoundException  exception)
 	{
 		request.setAttribute("success",exception.toString());
 		
